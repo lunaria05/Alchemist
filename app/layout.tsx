@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Parkinsans, Bungee_Inline } from "next/font/google";
 import "./globals.css";
+import Sidebar from "@/Components/Sidebar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const parkinsans = Parkinsans({
   subsets: ["latin"],
+  variable: "--font-parkinsans",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bungeeInline = Bungee_Inline({
   subsets: ["latin"],
+  variable: "--font-bungeeinline",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +27,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        <body
+        className={`${parkinsans.variable} ${bungeeInline.variable} antialiased bg-black text-white font-parkinsans`}
       >
-        {children}
+        <Sidebar />
+        {/* 
+            The ml-[70px] or ml-[85px] ensures the page content 
+            doesn't go under the sidebar on desktop 
+        */}
+        <main className="md:ml-[85px] transition-all duration-300 min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );
