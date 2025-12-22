@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Parkinsans, Bungee_Inline } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/Components/Sidebar";
+import ProgressProviders from "@/providers/ProgressProviders";
+import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 
 const parkinsans = Parkinsans({
   subsets: ["latin"],
@@ -30,14 +32,18 @@ export default function RootLayout({
         <body
         className={`${parkinsans.variable} ${bungeeInline.variable} antialiased bg-black text-white font-parkinsans`}
       >
+        <ProgressProviders>
         <Sidebar />
         {/* 
             The ml-[70px] or ml-[85px] ensures the page content 
             doesn't go under the sidebar on desktop 
         */}
         <main className="md:ml-[85px] transition-all duration-300 min-h-screen">
+          <SmoothScrollProvider>
           {children}
+          </SmoothScrollProvider>
         </main>
+        </ProgressProviders>
       </body>
     </html>
   );
