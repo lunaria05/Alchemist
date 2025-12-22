@@ -1,9 +1,28 @@
 import type { Metadata } from "next";
-import { Parkinsans, Bungee_Inline } from "next/font/google";
+import { Parkinsans, Bungee_Inline, Alexandria, Azeret_Mono, Neuton  } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/Components/Sidebar";
 import ProgressProviders from "@/providers/ProgressProviders";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
+
+const neuton = Neuton({
+  subsets: ["latin"],
+  variable: "--font-neuton",
+  weight: ["200", "300", "400", "700", "800"],
+});
+
+
+const azeretMono = Azeret_Mono({
+  subsets: ["latin"],
+  variable: "--font-azeretmono",
+  weight: ["200", "300", "400", "500", "600", "700"],
+});
+
+const alexandria = Alexandria({
+  subsets: ["latin"],
+  variable: "--font-alexandria",
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+});
 
 const parkinsans = Parkinsans({
   subsets: ["latin"],
@@ -30,8 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body
-        className={`${parkinsans.variable} ${bungeeInline.variable} antialiased bg-black text-white font-parkinsans`}
-      >
+  className={`${parkinsans.variable} ${bungeeInline.variable} ${azeretMono.variable} ${alexandria.variable} ${neuton.variable} antialiased bg-black text-white`}
+>
+
         <ProgressProviders>
         <Sidebar />
         {/* 

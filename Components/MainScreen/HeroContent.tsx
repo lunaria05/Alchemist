@@ -14,7 +14,7 @@ export default function HeroContent() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-[1.1] font-bungeeinline"
+          className="text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-[1.1] tracking-wide font-neuton "
         >
           Crafting Code. <br />
           <span className="text-zinc-500">Engineering AI.</span> <br />

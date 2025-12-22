@@ -33,7 +33,7 @@ export default function Sidebar() {
   return (
     <>
       {/* --- MOBILE CUSTOM SWITCH TOGGLE (Top-Left) --- */}
-      <div className="md:hidden fixed top-8 left-6 z-[120]">
+      <div className="md:hidden fixed top-8 left-6 z-120">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
@@ -43,7 +43,7 @@ export default function Sidebar() {
           )}
         >
           <span className={cn(
-            "relative z-20 font-parkinsans font-bold text-[9px] tracking-[0.15em] transition-all duration-500 pl-1.5",
+            "relative z-20 font-azeretmono font-bold text-[9px] tracking-[0.15em] transition-all duration-500 pl-1.5",
             isOpen ? "text-white/40" : "text-white/90"
           )}>
             MENU
@@ -66,7 +66,7 @@ export default function Sidebar() {
 
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div className={cn(
-          "fixed inset-0 z-[100] md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+          "fixed inset-0 z-100 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
           isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
       )}>
         <div className="absolute inset-0 bg-black/98 backdrop-blur-2xl" />
@@ -88,9 +88,9 @@ export default function Sidebar() {
                                 opacity: isOpen ? 1 : 0
                             }}
                         >
-                            <span className="text-[#ee502c] font-parkinsans font-bold text-xl mb-1">{item.id}</span>
+                            <span className="text-[#ee502c] font-azeretmono font-bold text-xl mb-1">{item.id}</span>
                             <span className={cn(
-                                "text-3xl sm:text-5xl font-parkinsans font-medium transition-all duration-300",
+                                "text-3xl sm:text-5xl font-azeretmono font-medium transition-all duration-300",
                                 isActive ? "text-white" : "text-zinc-800 group-hover:text-zinc-400"
                             )}>
                                 {item.label}
@@ -109,8 +109,8 @@ export default function Sidebar() {
                 isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             )}>
                 <div className="flex justify-between items-center">
-                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-parkinsans uppercase">Est. 2025</p>
-                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-parkinsans uppercase">Alchemist Inc.</p>
+                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-azeretmono uppercase">Est. 2025</p>
+                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-azeretmono uppercase">Alchemist Inc.</p>
                 </div>
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="flex items-center justify-between bg-[#ee502c] py-4 px-6 rounded-3xl group active:scale-95 transition-all shadow-[0_20px_40px_rgba(238,80,44,0.15)]">
                     <span className="text-black font-bold text-lg sm:text-xl">LET'S CONNECT</span>
@@ -122,7 +122,7 @@ export default function Sidebar() {
 
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className={cn(
-          "fixed left-0 top-0 h-screen bg-black border-r border-white/10 z-[90] transition-all duration-500 ease-in-out hidden md:flex flex-col",
+          "fixed left-0 top-0 h-screen bg-black border-r border-white/10 z-90 transition-all duration-500 ease-in-out hidden md:flex flex-col",
           "w-[70px] md:w-[80px] lg:w-[90px]"
       )}>
         <Link href="/" className="h-[10vh] flex items-center justify-center border-b border-white/5 shrink-0 p-2">
@@ -138,7 +138,7 @@ export default function Sidebar() {
                 href={item.href}
                 className={cn(
                   "relative flex flex-col items-center justify-center w-full transition-all duration-700 ease-in-out group border-b border-white/5",
-                  isActive ? "flex-[3] bg-white/[0.03]" : "flex-1 hover:bg-white/[0.02]"
+                  isActive ? "flex-3 bg-white/3" : "flex-1 hover:bg-white/2"
                 )}
               >
                 {isActive && (
@@ -146,11 +146,11 @@ export default function Sidebar() {
                 )}
                 
                 {/* --- THE TOASTER (TO THE RIGHT) --- */}
-                <div className="absolute left-[110%] pointer-events-none opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out z-[110] hidden md:block">
+                <div className="absolute left-[110%] pointer-events-none opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out z-110 hidden md:block">
                     <div className="relative bg-[#111] border border-white/10 px-5 py-2.5 rounded-r-md shadow-[20px_0_50px_rgba(0,0,0,0.5)] flex items-center gap-3">
                         {/* Orange Toaster Accent */}
                         <div className="absolute left-0 top-0 w-[2px] h-full bg-[#ee502c]" />
-                        <span className="text-white font-parkinsans text-xs font-bold tracking-widest whitespace-nowrap">
+                        <span className="text-white font-azeretmono text-xs font-bold tracking-widest whitespace-nowrap">
                             {item.label}
                         </span>
                         
@@ -164,7 +164,7 @@ export default function Sidebar() {
                     {item.id}
                   </span>
                   <div className={cn("overflow-hidden transition-all duration-700 flex items-center justify-center", isActive ? "opacity-100 max-h-[300px]" : "opacity-0 max-h-0")}>
-                    <span className="whitespace-nowrap font-parkinsans font-bold tracking-[0.3em] text-white text-[11px] md:text-xs lg:text-sm [writing-mode:vertical-lr] rotate-180 uppercase">
+                    <span className="whitespace-nowrap font-azeretmono font-bold tracking-[0.3em] text-white text-[11px] md:text-xs lg:text-sm [writing-mode:vertical-lr] rotate-180 uppercase">
                         {item.label}
                     </span>
                   </div>
@@ -175,7 +175,7 @@ export default function Sidebar() {
         </nav>
 
         <Link href="/contact" className="w-full bg-[#ee502c] hover:bg-[#ff6241] transition-all duration-300 py-8 flex flex-col items-center justify-center gap-4 shrink-0 group relative overflow-hidden">
-          <span className="[writing-mode:vertical-lr] font-parkinsans rotate-180 text-black font-black tracking-tighter text-sm md:text-base">
+          <span className="[writing-mode:vertical-lr] font-azeretmono rotate-180 text-black font-black tracking-tighter text-sm md:text-base">
             LET'S CONNECT
           </span>
           <FiArrowUpRight className="text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={24} />
