@@ -123,7 +123,7 @@ export default function Sidebar() {
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className={cn(
           "fixed left-0 top-0 h-screen bg-black border-r border-white/10 z-90 transition-all duration-500 ease-in-out hidden md:flex flex-col",
-          "w-[70px] md:w-[80px] lg:w-[90px]"
+          "w-[70px] md:w-[80px] xl:w-[90px]"
       )}>
         <Link href="/" className="h-[10vh] flex items-center justify-center border-b border-white/5 shrink-0 p-2">
             <Image src={logo} alt="Logo" className="w-auto h-full aspect-square object-contain"/>

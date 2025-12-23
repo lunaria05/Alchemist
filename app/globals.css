@@ -12,7 +12,9 @@
   /* --font-bungeeinline: var(--font-bungeeinline); */
   --font-azeretmono: var(--font-azeretmono);
   --font-alexandria: var(--font-alexandria);
-  --font-neuton: var(--font-neuton);
+  /* --font-neuton: var(--font-neuton); */
+  /* --font-jetbrainsmono: var(--font-jetbrainsmono); */
+  --font-unbounded: var(--font-unbounded);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
-import { Parkinsans, Bungee_Inline, Alexandria, Azeret_Mono, Neuton  } from "next/font/google";
+import { Parkinsans, Bungee_Inline, Alexandria, Azeret_Mono, Neuton, JetBrains_Mono, Unbounded,  } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/Components/Sidebar";
 import ProgressProviders from "@/providers/ProgressProviders";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  variable: "--font-unbounded",
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+});
+
+
 const neuton = Neuton({
   subsets: ["latin"],
   variable: "--font-neuton",
   weight: ["200", "300", "400", "700", "800"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrainsmono",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
 
 
@@ -49,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body
-  className={`${parkinsans.variable} ${bungeeInline.variable} ${azeretMono.variable} ${alexandria.variable} ${neuton.variable} antialiased bg-black text-white`}
+  className={`${parkinsans.variable} ${bungeeInline.variable} ${azeretMono.variable} ${alexandria.variable} ${jetbrainsMono.variable} ${neuton.variable} ${unbounded.variable} antialiased bg-black text-white`}
 >
 
         <ProgressProviders>
@@ -58,7 +71,7 @@ export default function RootLayout({
             The ml-[70px] or ml-[85px] ensures the page content 
             doesn't go under the sidebar on desktop 
         */}
-        <main className="md:ml-[85px] transition-all duration-300 min-h-screen">
+        <main className="md:ml-[80px] xl:ml-[90px] transition-all duration-300 min-h-screen">
           <SmoothScrollProvider>
           {children}
           </SmoothScrollProvider>
