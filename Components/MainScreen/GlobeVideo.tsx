@@ -6,13 +6,17 @@ import { FiX, FiPlay } from "react-icons/fi";
 export default function GlobeVideo() {
   const [isNear, setIsNear] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isGlobeActive, setIsGlobeActive] = useState(false); 
+  const [isGlobeActive, setIsGlobeActive] = useState(false);
+  const [shouldShow, setShouldShow] = useState(true);
   const { scrollYProgress } = useScroll();
 
   // --- 1. INTERACTION SYNC ---
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     // Activates interactions as soon as the video begins to fade in
-    setIsGlobeActive(latest >= 0.25);
+    setIsGlobeActive(latest >= 0.1 && latest < 0.5);
+
+    // Hide video completely after scrolling past hero section
+    setShouldShow(latest < 0.5);
   });
 
   // --- 2. SPRING PHYSICS CURSOR ---
@@ -27,17 +31,21 @@ export default function GlobeVideo() {
   }, [mouseX, mouseY]);
 
   // --- 3. REVEAL TIMING ---
-  const opacity = useTransform(scrollYProgress, [0.25, 0.55], [0, 1]);
-  const globeScale = useTransform(scrollYProgress, [0.25, 0.55], [0.6, 1]);
+  // Appears early when globe starts forming from particles, stays visible, then fades out before text section
+  const opacity = useTransform(scrollYProgress, [0.1, 0.3, 0.45, 0.5], [0, 1, 1, 0]);
+  const globeScale = useTransform(scrollYProgress, [0.1, 0.3], [0.6, 1]);
 
   useEffect(() => {
     document.body.style.overflow = isExpanded ? 'hidden' : 'unset';
   }, [isExpanded]);
 
+  // Don't render video at all after scrolling past hero section
+  if (!shouldShow && !isExpanded) return null;
+
   return (
     <>
       {/* --- PROXIMITY DETECTION ZONE --- */}
-      <div 
+      <div
         className="fixed inset-0 flex items-center justify-center z-[100] pointer-events-none"
         onMouseMove={handleMouseMove}
       >

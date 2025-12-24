@@ -2,10 +2,11 @@ import ParticleBackground from "@/Components/MainScreen/ParticleBackground";
 import HeroContent from "@/Components/MainScreen/HeroContent";
 import TechCarousel from "@/Components/MainScreen/TechCarousel";
 import GlobeVideo from "@/Components/MainScreen/GlobeVideo";
+import TextScrubSection from "@/Components/MainScreen/TextScrubSection";
 
 export default function Home() {
   return (
-    // Parent container is 250vh to give 200vh of "stickiness" + 50vh spacer
+    <>
     <div id="sticky-wrapper" className="relative h-[250vh] bg-transparent">
       
       {/* 3D Particles & Video - Always Fixed in Background */}
@@ -36,5 +37,14 @@ export default function Home() {
       {/* This spacer creates the scroll distance of 150vh */}
       <div className="h-[150vh] pointer-events-none" />
     </div>
+    {/* Spacer to ensure video shows properly before text section */}
+    <div className="h-[100vh] bg-transparent" />
+
+    {/* Text section with scroll-based word reveal */}
+    <div className="relative z-[150]">
+      <TextScrubSection />
+    </div>
+    {/* <div className="bg-black h-screen z-[200]"></div> */}
+    </>
   );
 }
