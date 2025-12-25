@@ -12,11 +12,11 @@ export default function GlobeVideo() {
 
   // --- 1. INTERACTION SYNC ---
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Activates interactions as soon as the video begins to fade in
-    setIsGlobeActive(latest >= 0.1 && latest < 0.5);
+    // Activates interactions when globe starts forming
+    setIsGlobeActive(latest >= 0.1 && latest < 0.55);
 
-    // Hide video completely after scrolling past hero section
-    setShouldShow(latest < 0.5);
+    // Hide video completely when next component comes
+    setShouldShow(latest < 0.55);
   });
 
   // --- 2. SPRING PHYSICS CURSOR ---
@@ -31,9 +31,9 @@ export default function GlobeVideo() {
   }, [mouseX, mouseY]);
 
   // --- 3. REVEAL TIMING ---
-  // Appears early when globe starts forming from particles, stays visible, then fades out before text section
-  const opacity = useTransform(scrollYProgress, [0.1, 0.3, 0.45, 0.5], [0, 1, 1, 0]);
-  const globeScale = useTransform(scrollYProgress, [0.1, 0.3], [0.6, 1]);
+  // Appears when globe starts forming with high opacity immediately, removes when next component comes
+  const opacity = useTransform(scrollYProgress, [0.1, 0.15, 0.5, 0.55], [0, 1, 1, 0]);
+  const globeScale = useTransform(scrollYProgress, [0.1, 0.25], [0.7, 1]);
 
   useEffect(() => {
     document.body.style.overflow = isExpanded ? 'hidden' : 'unset';

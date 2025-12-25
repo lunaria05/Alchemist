@@ -47,7 +47,7 @@ export default function TestimonialAccordion() {
   });
 
   return (
-    <section ref={containerRef} className="relative bg-black min-h-[400vh]">
+    <section ref={containerRef} className="relative bg-black min-h-[400vh] z-[150]">
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center px-6 md:px-20 overflow-hidden">
         
         {/* --- SECTION HEADER --- */}
