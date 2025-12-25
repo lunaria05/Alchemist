@@ -6,6 +6,7 @@ import TextScrubSection from "@/Components/MainScreen/TextScrubSection";
 import ServicesAccordion from "@/Components/MainScreen/Testimonial";
 import TestimonialAccordion from "@/Components/MainScreen/Testimonial";
 import ServicesSection from "@/Components/MainScreen/ServicesSection";
+import ProjectsSection from "@/Components/MainScreen/ProjectsSection";
 
 export default function Home() {
   return (
@@ -53,6 +54,9 @@ export default function Home() {
       </div> 
       <div className="relative z-[150]">
       <ServicesSection />
+      </div>
+      <div className="">
+      <ProjectsSection />
       </div>
 
       {/* Footer / Contact Spacer */}
