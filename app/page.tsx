@@ -3,7 +3,8 @@ import HeroContent from "@/Components/MainScreen/HeroContent";
 import TechCarousel from "@/Components/MainScreen/TechCarousel";
 import GlobeVideo from "@/Components/MainScreen/GlobeVideo";
 import TextScrubSection from "@/Components/MainScreen/TextScrubSection";
-import ServicesAccordion from "@/Components/MainScreen/ServicesAccordion";
+import ServicesAccordion from "@/Components/MainScreen/Testimonial";
+import TestimonialAccordion from "@/Components/MainScreen/Testimonial";
 
 export default function Home() {
   return (
@@ -46,10 +47,9 @@ export default function Home() {
       <TextScrubSection />
     </div>
     {/* <div className="bg-black h-screen z-[200]"></div> */}
-    {/* NEW COMPONENT HERE */}
-    <div className="relative z-[200]">
-        <ServicesAccordion />
-      </div>
+    <div className="relative z-[150]">
+        <TestimonialAccordion />
+      </div> 
 
       {/* Footer / Contact Spacer */}
       <div className="h-screen bg-black flex items-center justify-center relative z-[210]">

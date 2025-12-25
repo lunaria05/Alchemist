@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { FiStar } from "react-icons/fi";
 
@@ -56,9 +56,15 @@ export default function TestimonialAccordion() {
               <span className="font-azeretmono text-[10px] tracking-[0.5em] text-[#ee502c] uppercase mb-3 text-shadow-glow">Verification</span>
               <h2 className="font-neuton text-5xl md:text-7xl text-white tracking-tighter uppercase italic">Client logs</h2>
            </div>
-           <div className="font-azeretmono text-[9px] text-white/20 uppercase hidden md:block tracking-widest">
-              [ Total_Transmutations: 124 ]
-           </div>
+           {/* Scroll Hint */}
+           <div className="flex items-center gap-3">
+                <span className="font-azeretmono text-[10px] text-white/30 uppercase tracking-[0.4em] group-hover:text-white/30 transition-colors">
+                    Scroll_to_Sync
+                </span>
+                <div className="w-1.5 h-1.5 rounded-full border border-white/30 flex items-center justify-center">
+                    <div className="w-0.5 h-0.5 rounded-full bg-white/40" />
+                </div>
+             </div>
         </div>
 
         {/* --- ACCORDION LIST --- */}
@@ -85,6 +91,9 @@ function TestimonialItem({ data, index, total, progress }: any) {
   // Scoped progress: 0 is closed, 1 is fully open
   const isActive = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
   
+  // Linear progress for the "Scroll to View" indicator (0 to 1 as we move through the sector)
+  const sectorProgress = useTransform(progress, [start, start + 0.1], [0, 1]);
+
   // Style Transitions
   const height = useTransform(isActive, [0, 1], ["80px", "500px"]); 
   const opacityDetails = useTransform(isActive, [0.4, 0.7], [0, 1]); 
@@ -95,56 +104,66 @@ function TestimonialItem({ data, index, total, progress }: any) {
   return (
     <motion.div 
       style={{ height, borderColor }}
-      className="relative w-full border-b overflow-hidden group transition-colors duration-500 hover:bg-white/[0.02]"
+      className="relative w-full border-b overflow-hidden group transition-colors duration-500 hover:bg-white/[0.01]"
     >
       <div className="h-full w-full flex items-center relative">
         
-        {/* --- 1. CLOSED STATE UI (Simple Row) --- */}
+        {/* --- 1. UNIQUE SECTOR INDICATOR (Far Left) --- */}
+        <div className="absolute left-0 top-0 h-full w-1 flex flex-col justify-center pointer-events-none">
+            <motion.div 
+                style={{ scaleY: sectorProgress, originY: 0 }}
+                className="w-full h-1/2 bg-[#ee502c] shadow-[0_0_10px_#ee502c]"
+            />
+        </div>
+
+        {/* --- 2. CLOSED STATE UI --- */}
         <motion.div 
           style={{ opacity: closedInfoOpacity }}
-          className="absolute inset-0 flex items-center justify-between px-4 md:px-8 pointer-events-none"
+          className="absolute inset-0 flex items-center justify-between px-6 md:px-12 pointer-events-none"
         >
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8">
             <span className="font-azeretmono text-xs text-[#ee502c] opacity-50">{data.id}</span>
-            {/* Small Micro-Avatar */}
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20 grayscale">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20 grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700">
               <img src={data.image} alt="" className="w-full h-full object-cover" />
             </div>
-            <h3 className="font-unbounded text-sm md:text-base text-white/60 tracking-widest uppercase">
+            <h3 className="font-unbounded text-sm md:text-base text-white/40 group-hover:text-white transition-colors tracking-widest uppercase">
               {data.name}
             </h3>
           </div>
-          <div className="flex items-center gap-4">
-             <span className="font-azeretmono text-[8px] text-white/20 uppercase tracking-[0.3em]">Status: Verified</span>
-             <div className="w-2 h-2 rounded-full bg-zinc-800" />
+
+          <div className="flex items-center gap-10">
+             {/* Gray Stars in Closed State */}
+             <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                    <FiStar key={i} fill={i < data.rating ? "rgba(113, 113, 122, 0.3)" : "none"} color="rgba(113, 113, 122, 0.5)" size={12} />
+                ))}
+             </div>
+             
           </div>
         </motion.div>
 
-        {/* --- 2. OPEN STATE UI (Detailed View) --- */}
+        {/* --- 3. OPEN STATE UI --- */}
         <div className="w-full flex items-center py-10">
             
-            {/* LARGE BIO PORTAL (LEFT) */}
+            {/* LARGE BIO PORTAL */}
             <motion.div 
               style={{ opacity: opacityDetails, scale: portalScale }}
               className="hidden md:flex w-1/3 justify-center items-center pl-10"
             >
               <div className="relative w-56 h-56">
-                 {/* Decorative technical ring */}
                  <motion.div 
                    animate={{ rotate: -360 }}
                    transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                    className="absolute -inset-6 border border-dashed border-[#ee502c]/20 rounded-full" 
                  />
                  <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#ee502c] shadow-[0_0_50px_rgba(238,80,44,0.15)]">
-                    <img src={data.image} alt={data.name} className="w-full h-full object-cover grayscale-0" />
+                    <img src={data.image} alt={data.name} className="w-full h-full object-cover" />
                  </div>
               </div>
             </motion.div>
 
-            {/* EXPANDED CONTENT (CENTER) */}
+            {/* EXPANDED CONTENT */}
             <div className="flex-1 flex flex-col items-center md:items-start justify-center px-8 md:px-16">
-              
-              {/* Name and Role Title */}
               <motion.div style={{ opacity: opacityDetails }} className="relative mb-8 text-center md:text-left">
                  <h3 className="text-4xl md:text-6xl font-unbounded font-black text-white uppercase tracking-tighter">
                    {data.name}
@@ -157,14 +176,13 @@ function TestimonialItem({ data, index, total, progress }: any) {
                  </div>
               </motion.div>
               
-              {/* Testimonial Text & Rating */}
               <motion.div 
                 style={{ opacity: opacityDetails }}
                 className="flex flex-col items-center md:items-start max-w-2xl"
               >
-                {/* Modern Technical Star Rating */}
+                {/* Orange Stars in Open State */}
                 <div className="flex gap-2 mb-8 items-center">
-                   <span className="font-azeretmono text-[8px] text-white/30 mr-2 uppercase">Integrity_Score:</span>
+                   <span className="font-azeretmono text-[8px] text-white/30 mr-2 uppercase tracking-widest">Integrity_Score:</span>
                    {[...Array(5)].map((_, i) => (
                     <FiStar key={i} fill={i < data.rating ? "#ee502c" : "none"} color={i < data.rating ? "#ee502c" : "rgba(255,255,255,0.1)"} size={14} />
                    ))}
@@ -176,7 +194,7 @@ function TestimonialItem({ data, index, total, progress }: any) {
               </motion.div>
             </div>
 
-            {/* ID INDICATOR (RIGHT) */}
+            {/* ID INDICATOR */}
             <motion.div 
               style={{ opacity: opacityDetails }}
               className="w-32 hidden lg:flex flex-col items-center justify-center opacity-20"
