@@ -5,6 +5,7 @@ import GlobeVideo from "@/Components/MainScreen/GlobeVideo";
 import TextScrubSection from "@/Components/MainScreen/TextScrubSection";
 import ServicesAccordion from "@/Components/MainScreen/Testimonial";
 import TestimonialAccordion from "@/Components/MainScreen/Testimonial";
+import ServicesSection from "@/Components/MainScreen/ServicesSection";
 
 export default function Home() {
   return (
@@ -50,6 +51,9 @@ export default function Home() {
     <div className="relative z-[150]">
         <TestimonialAccordion />
       </div> 
+      <div className="relative z-[150]">
+      <ServicesSection />
+      </div>
 
       {/* Footer / Contact Spacer */}
       <div className="h-screen bg-black flex items-center justify-center relative z-[210]">
