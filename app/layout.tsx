@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/Components/Sidebar";
 import ProgressProviders from "@/providers/ProgressProviders";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
+import InitialLoader from "@/Components/InitialLoader";
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -64,12 +65,14 @@ export default function RootLayout({
         <body
   className={`${parkinsans.variable} ${bungeeInline.variable} ${azeretMono.variable} ${alexandria.variable} ${jetbrainsMono.variable} ${neuton.variable} ${unbounded.variable} antialiased bg-black text-white`}
 >
+        {/* Initial Loading Screen */}
+        <InitialLoader />
 
         <ProgressProviders>
         <Sidebar />
-        {/* 
-            The ml-[70px] or ml-[85px] ensures the page content 
-            doesn't go under the sidebar on desktop 
+        {/*
+            The ml-[70px] or ml-[85px] ensures the page content
+            doesn't go under the sidebar on desktop
         */}
         <main className="md:ml-[80px] xl:ml-[90px] transition-all duration-300 min-h-screen">
           <SmoothScrollProvider>

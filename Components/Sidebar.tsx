@@ -8,6 +8,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import logo from "@/app/assets/logo.png";
+import { motion } from "framer-motion";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -66,59 +67,111 @@ export default function Sidebar() {
 
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div className={cn(
-          "fixed inset-0 z-180 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
-          isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-      )}>
-        <div className="absolute inset-0 bg-black/98 backdrop-blur-2xl" />
-        
-        <div className="relative h-full flex flex-col p-8 pt-32">
-            <nav className="flex-1 flex flex-col justify-center space-y-8">
-                {navItems.map((item, index) => {
-                    const isActive = pathname === item.href;
-                    return (
-                        <Link
-                            key={item.id}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className="flex items-center gap-5 group text-left"
-                            style={{ 
-                                transition: 'all 0.6s cubic-bezier(0.19,1,0.22,1)',
-                                transitionDelay: isOpen ? `${index * 80}ms` : '0ms',
-                                transform: isOpen ? 'translateY(0)' : 'translateY(30px)',
-                                opacity: isOpen ? 1 : 0
-                            }}
-                        >
-                            <span className="text-[#ee502c] font-azeretmono font-bold text-xl mb-1">{item.id}</span>
-                            <span className={cn(
-                                "text-3xl sm:text-5xl font-azeretmono font-medium transition-all duration-300",
-                                isActive ? "text-white" : "text-zinc-800 group-hover:text-zinc-400"
-                            )}>
-                                {item.label}
-                            </span>
-                            <FiArrowRight className={cn(
-                                "transition-all duration-500",
-                                isActive ? "text-[#ee502c] opacity-100 translate-x-0 scale-125" : "opacity-0 -translate-x-4"
-                            )} size={28} />
-                        </Link>
-                    );
-                })}
-            </nav>
+    "fixed inset-0 z-180 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+    isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+)}>
+    {/* Background with subtle technical texture */}
+    <div className="absolute inset-0 bg-[#050505] backdrop-blur-3xl" />
+    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+         style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-            <div className={cn(
-                "mt-auto pt-10 border-t border-white/5 flex flex-col gap-6 transition-all duration-1000 delay-500",
-                isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            )}>
-                <div className="flex justify-between items-center">
-                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-azeretmono uppercase">Est. 2025</p>
-                   <p className="text-zinc-600 text-xs tracking-[0.3em] font-azeretmono uppercase">Alchemist Inc.</p>
-                </div>
-                <Link href="/contact" onClick={() => setIsOpen(false)} className="flex items-center justify-between bg-[#ee502c] py-4 px-6 rounded-3xl group active:scale-95 transition-all shadow-[0_20px_40px_rgba(238,80,44,0.15)]">
-                    <span className="text-black font-bold text-lg sm:text-xl">LET'S CONNECT</span>
-                    <FiArrowUpRight size={32} className="text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </Link>
+    <div className="relative h-full flex flex-col px-6 py-8 overflow-hidden">
+        
+        {/* --- 1. HEADER: SYSTEM STATUS (Fixed) --- */}
+        <div className="pt-16 pb-6 border-b border-white/5 flex justify-between items-center shrink-0">
+            <div className="flex flex-col gap-1">
+                <span className="font-azeretmono text-[8px] tracking-[0.4em] text-[#ee502c] uppercase">System_Active</span>
+                <span className="font-azeretmono text-[10px] text-white/40 uppercase tracking-widest">Alchemist_Terminal_v4.0</span>
+            </div>
+            <div className="flex gap-1">
+                {[...Array(3)].map((_, i) => (
+                    <motion.div 
+                        key={i}
+                        animate={{ opacity: [0.2, 1, 0.2] }}
+                        transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2 }}
+                        className="w-1 h-1 bg-[#ee502c] rounded-full"
+                    />
+                ))}
             </div>
         </div>
-      </div>
+
+        {/* --- 2. MAIN NAV: DATA MODULES (Scrollable if height is small) --- */}
+        <nav className="flex-1 overflow-y-auto no-scrollbar py-6 space-y-2">
+            
+            {navItems.map((item, index) => {
+                const isActive = pathname === item.href;
+                return (
+                    <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={isOpen ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: index * 0.05 + 0.3 }}
+                    >
+                        <Link
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                                "group relative flex items-center justify-between p-3 border border-white/5 transition-all duration-500",
+                                isActive ? "bg-white/3 border-[#ee502c]/30" : "bg-white/3 hover:bg-white/1"
+                            )}
+                        >
+                            {/* Active Indicator Line */}
+                            <div className={cn(
+                                "absolute left-0 top-0 h-full w-[2px] transition-all duration-500",
+                                isActive ? "bg-[#ee502c]" : "bg-transparent group-hover:bg-white/10"
+                            )} />
+
+                            <div className="flex flex-col">
+                                {/* <span className="font-azeretmono text-[9px] text-[#ee502c] font-bold opacity-50 uppercase tracking-tighter">
+                                    Idx_{item.id}
+                                </span> */}
+                                <span className={cn(
+                                    "font-azeretmono text-base font-medium tracking-widest transition-colors duration-500",
+                                    isActive ? "text-white" : "text-white/40 group-hover:text-white"
+                                )}>
+                                    {item.label}
+                                </span>
+                            </div>
+
+                            <div className="flex flex-col items-end gap-1 opacity-20 group-hover:opacity-100 transition-opacity">
+                                <span className="font-azeretmono text-[6px] text-white uppercase tracking-widest">
+                                    {isActive ? "Connected" : "Standby"}
+                                </span>
+                                <FiArrowRight size={14} className={cn(
+                                    "transition-transform",
+                                    isActive ? "text-[#ee502c]" : "text-white group-hover:translate-x-1"
+                                )} />
+                            </div>
+                        </Link>
+                    </motion.div>
+                );
+            })}
+        </nav>
+
+        {/* --- 3. FOOTER: INTERFACE META (Fixed) --- */}
+        <div className="pt-6 border-t border-white/5 shrink-0 flex flex-col gap-6">
+
+            {/* Industrial Minimalist Connect Button */}
+            <Link 
+                href="/contact" 
+                onClick={() => setIsOpen(false)} 
+                className="group relative flex items-center justify-between border border-white/20 h-14 px-5 overflow-hidden transition-all hover:border-[#ee502c]/50 active:scale-95"
+            >
+                {/* Scanning background effect */}
+                <motion.div 
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                    className="absolute inset-0 w-1/2 h-full bg-linear-to-r from-transparent via-white/3 to-transparent pointer-events-none"
+                />
+                
+                <span className="relative z-10 font-azeretmono text-[10px] font-black text-white tracking-[0.4em] uppercase">
+                    Connect Protocol
+                </span>
+                <FiArrowUpRight size={18} className="relative z-10 text-[#ee502c] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+        </div>
+    </div>
+</div>
 
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className={cn(
