@@ -60,9 +60,9 @@ export default function Home() {
       </div>
 
       {/* Footer / Contact Spacer */}
-      <div className="h-screen bg-black flex items-center justify-center relative z-[210]">
+      {/* <div className="h-screen bg-black flex items-center justify-center relative z-[210]">
          <h2 className="text-white/10 uppercase tracking-[1em] text-xs">Let's Transmute</h2>
-      </div>
+      </div> */}
     </>
   );
 }
