@@ -5,10 +5,11 @@ import { FiArrowRight, FiGithub, FiTwitter, FiLinkedin, FiInstagram } from "reac
 export default function HeroContent() {
   const { scrollYProgress } = useScroll();
 
-  const opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.25], [1, 0.95]);
-  const blur = useTransform(scrollYProgress, [0, 0.2], ["blur(0px)", "blur(10px)"]);
-  const translateY = useTransform(scrollYProgress, [0, 0.25], [0, 50]);
+  // Hide earlier when globe particle formation starts
+  const opacity = useTransform(scrollYProgress, [0, 0.08, 0.12], [1, 0.6, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.12], [1, 0.92]);
+  const blur = useTransform(scrollYProgress, [0, 0.08, 0.12], ["blur(0px)", "blur(4px)", "blur(12px)"]);
+  const translateY = useTransform(scrollYProgress, [0, 0.12], [0, -30]);
 
   const socialLinks = [{ icon: <FiGithub />, href: "#" }, { icon: <FiTwitter />, href: "#" }, { icon: <FiLinkedin />, href: "#" }, { icon: <FiInstagram />, href: "#" }];
 

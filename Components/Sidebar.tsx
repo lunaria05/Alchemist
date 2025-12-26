@@ -33,7 +33,7 @@ export default function Sidebar() {
   return (
     <>
       {/* --- MOBILE CUSTOM SWITCH TOGGLE (Top-Left) --- */}
-      <div className="md:hidden fixed top-8 left-6 z-120">
+      <div className="md:hidden fixed top-8 left-6 z-200">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
@@ -66,7 +66,7 @@ export default function Sidebar() {
 
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div className={cn(
-          "fixed inset-0 z-100 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+          "fixed inset-0 z-180 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
           isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
       )}>
         <div className="absolute inset-0 bg-black/98 backdrop-blur-2xl" />
