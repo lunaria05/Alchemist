@@ -57,9 +57,9 @@ export default function ProjectsSection() {
                 <div className="w-10 h-px bg-[#ee502c] shadow-[0_0_10px_#ee502c]" />
                 <span className="font-azeretmono text-[10px] tracking-[0.6em] text-[#ee502c] uppercase">Selected_Artifacts</span>
             </div>
-            <h2 className="font-unbounded font-black text-4xl md:text-7xl lg:text-8xl text-white uppercase tracking-tighter leading-[0.8]">
+            <h2 className="font-unbounded font-black text-4xl md:text-6xl lg:text-7xl text-white uppercase tracking-tighter leading-[0.8]">
                 Featured <br/>
-                <span className="text-zinc-800 italic uppercase">Portfolio.</span>
+                <span className="text-[#ee502c] italic uppercase">Portfolio.</span>
             </h2>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function ProjectsSection() {
                   {/* Arrow Toggle Area - Click to Expand */}
                   <button 
                     onClick={() => setActiveIndex(isActive ? null : index)}
-                    className="absolute top-0 right-0 w-[25%] h-[80px] z-30 flex items-center justify-center border-l border-white/5"
+                    className="cursor-pointer absolute top-0 right-0 w-[25%] h-[80px] z-30 flex items-center justify-center border-l border-white/5"
                   >
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${isActive ? 'bg-[#ee502c] border-[#ee502c] text-black' : 'bg-white/5 border-white/10 text-white/30'}`}>
                        {isActive ? <FiChevronUp size={20}/> : <FiChevronRight size={20}/>}
@@ -177,7 +177,7 @@ function ProjectInfo({ data, isActive, mobile }: any) {
                         <span className="font-azeretmono text-[9px] lg:text-[10px] text-[#ee502c] tracking-[0.5em] uppercase">
                             Ref: {data.id} // {data.category}
                         </span>
-                        <h3 className="font-unbounded font-black text-2xl md:text-4xl lg:text-6xl text-white uppercase tracking-tighter leading-none">
+                        <h3 className="font-unbounded font-black text-2xl md:text-3xl lg:text-4xl text-white uppercase tracking-tighter leading-none">
                             {data.title}
                         </h3>
                         <div className="flex items-center gap-4">

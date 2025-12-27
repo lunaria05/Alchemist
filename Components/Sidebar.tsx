@@ -34,7 +34,7 @@ export default function Sidebar() {
   return (
     <>
       {/* --- MOBILE CUSTOM SWITCH TOGGLE (Top-Left) --- */}
-      <div className="md:hidden fixed top-8 left-6 z-200">
+      <div className="md:hidden fixed top-8 left-6 z-[260]">
         <button 
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
@@ -67,7 +67,7 @@ export default function Sidebar() {
 
       {/* --- MOBILE FULL-SCREEN MENU --- */}
       <div className={cn(
-    "fixed inset-0 z-180 md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+    "fixed inset-0 z-[250] md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
     isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
 )}>
     {/* Background with subtle technical texture */}
@@ -175,7 +175,7 @@ export default function Sidebar() {
 
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className={cn(
-          "fixed left-0 top-0 h-screen bg-black border-r border-white/10 z-90 transition-all duration-500 ease-in-out hidden md:flex flex-col",
+          "fixed left-0 top-0 h-screen bg-black border-r border-white/10 z-[250] transition-all duration-500 ease-in-out hidden md:flex flex-col",
           "w-[70px] md:w-[80px] xl:w-[90px]"
       )}>
         <Link href="/" className="h-[10vh] flex items-center justify-center border-b border-white/5 shrink-0 p-2">
@@ -199,7 +199,7 @@ export default function Sidebar() {
                 )}
                 
                 {/* --- THE TOASTER (TO THE RIGHT) --- */}
-                <div className="absolute left-[110%] pointer-events-none opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out z-110 hidden md:block">
+                <div className="absolute left-[110%] pointer-events-none opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out z-50 hidden md:block">
                     <div className="relative bg-[#111] border border-white/10 px-5 py-2.5 rounded-r-md shadow-[20px_0_50px_rgba(0,0,0,0.5)] flex items-center gap-3">
                         {/* Orange Toaster Accent */}
                         <div className="absolute left-0 top-0 w-[2px] h-full bg-[#ee502c]" />

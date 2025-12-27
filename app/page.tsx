@@ -7,6 +7,7 @@ import ServicesAccordion from "@/Components/MainScreen/Testimonial";
 import TestimonialAccordion from "@/Components/MainScreen/Testimonial";
 import ServicesSection from "@/Components/MainScreen/ServicesSection";
 import ProjectsSection from "@/Components/MainScreen/ProjectsSection";
+import ContactProtocol from "@/Components/MainScreen/ContactProtocol";
 
 export default function Home() {
   return (
@@ -60,9 +61,9 @@ export default function Home() {
       </div>
 
       {/* Footer / Contact Spacer */}
-      {/* <div className="h-screen bg-black flex items-center justify-center relative z-[210]">
-         <h2 className="text-white/10 uppercase tracking-[1em] text-xs">Let's Transmute</h2>
-      </div> */}
+      <div className="relative z-[180]">
+      <ContactProtocol />
+      </div>
     </>
   );
 }

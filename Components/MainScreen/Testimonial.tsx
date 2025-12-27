@@ -127,7 +127,7 @@ function TestimonialItem({ data, index, total, progress }: any) {
             <div className="w-6 h-6 md:w-8 md:h-8 rounded-full overflow-hidden border border-white/20 grayscale opacity-40">
               <img src={data.image} alt="" className="w-full h-full object-cover" />
             </div>
-            <h3 className="font-unbounded text-[10px] md:text-base text-white/40 tracking-widest uppercase truncate max-w-[150px] md:max-w-none">
+            <h3 className="font-unbounded text-[10px] md:text-sm text-white/40 tracking-widest uppercase truncate max-w-[150px] md:max-w-none">
               {data.name}
             </h3>
           </div>
@@ -163,7 +163,7 @@ function TestimonialItem({ data, index, total, progress }: any) {
             {/* EXPANDED CONTENT */}
             <div className="flex-1 flex flex-col items-center md:items-start justify-center px-6 md:px-16 text-center md:text-left">
               <div className="relative mb-4 md:mb-8">
-                 <h3 className="text-2xl sm:text-4xl lg:text-6xl font-unbounded font-black text-white uppercase tracking-tighter leading-none">
+                 <h3 className="text-2xl sm:text-3xl lg:text-5xl font-unbounded font-black text-white uppercase tracking-tighter leading-none">
                    {data.name}
                  </h3>
                  <div className="flex items-center justify-center md:justify-start gap-2 md:gap-4 mt-2 md:mt-3">
@@ -182,7 +182,7 @@ function TestimonialItem({ data, index, total, progress }: any) {
                    ))}
                 </div>
 
-                <p className="text-zinc-400 font-neuton text-base sm:text-xl lg:text-2xl leading-relaxed italic border-l-2 border-[#ee502c]/30 pl-4 md:pl-6">
+                <p className="text-zinc-400 font-neuton text-base sm:text-lg lg:text-xl leading-relaxed italic border-l-2 border-[#ee502c]/30 pl-4 md:pl-6">
                   "{data.content}"
                 </p>
               </div>
